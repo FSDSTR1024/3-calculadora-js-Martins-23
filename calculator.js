@@ -5,24 +5,54 @@ const buttonsDiv = document.getElementById("buttons");
 
 /*********************** CALCULATOR CLASS ***********************/
 class Calculator {
+    numbersList = ['0'];
+    operationsList = [];
+    wasOperationPressed = false;
+
+    // Function to print the display content
+    _printDisplay() {
+        let displayContent = '';
+        for (let index = 0; index < this.numbersList.length; index++) {
+            displayContent += this.numbersList[index];
+            if (index < this.operationsList.length) {
+                displayContent += ` ${this.operationsList[index]} `;
+            }
+        }
+        display.textContent = displayContent;
+    }
+
     // Function to add the input number to the display, handling 0's
     addNumberToDisplay(number) {
-        // If the display is empty, set it to the introduced value
-        if (display.textContent.normalize('NFKC').includes('\u200B')) {
-            display.textContent = number;
-            return;
+        // Show in the display the introduced value if:
+        // - No number was pressed before, the display is "empty"
+        // - The current value in the display is a 0
+        if (this.numbersList.length === 1 && this.numbersList[0] === '0') {
+            this.numbersList[0] = number;
         }
-        // If current value in display is 0, replace it with introduced value
-        if (display.textContent === "0") {
-            display.textContent = number;
-            return;
+        // Check if an operation was pressed before
+        else if (this.wasOperationPressed === true) {
+            // An operation was pressed before, add to the list a new number
+            this.wasOperationPressed = false;
+            this.numbersList.push(number);
+        } else if (this.wasOperationPressed === false) {
+            // A number was pressed before, so concatenate the new number to the current value
+            this.numbersList[this.numbersList.length - 1] += number;
         }
-        display.textContent += number.toString();
+        this._printDisplay();
     }
 
     // Function to add the input operation to the display
     addOperationToDisplay(operation) {
-        display.textContent += ` ${operation} `;
+        // Check if an operation was pressed before
+        if (this.wasOperationPressed === true) {
+            // An operation was pressed before, so change the last operation
+            this.operationsList[this.operationsList.length - 1] = operation;
+        } else if (this.wasOperationPressed === false) {
+            // A number was pressed before, so add to the list a new operation
+            this.wasOperationPressed = true;
+            this.operationsList.push(operation);
+        }
+        this._printDisplay();
     }
 }
 
