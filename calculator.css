@@ -1,0 +1,24 @@
+/* 1. Calculator Header */
+#calculator {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Calculator Display */
+h2 {
+  border: 3px solid black;
+  text-align: right;
+}
+
+/* 3. Calculator Numbers */
+#buttons {
+  column-gap: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 5px;
+}
+
+#buttons button {
+  font-size: 20px;
+}
