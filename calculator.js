@@ -26,7 +26,7 @@ class Calculator {
         // Show in the display the introduced value if:
         // - No number was pressed before, the display is "empty"
         // - The current value in the display is a 0
-        if (this.numbersList.length === 1 && this.numbersList[0] === '0') {
+        if (this.numbersList.length === 1 && this.numbersList[0] === '0' && this.wasOperationPressed === false) {
             this.numbersList[0] = number;
         }
         // Check if an operation was pressed before
