@@ -99,8 +99,10 @@ document.addEventListener("keydown", (event) => {
     const numbersKeyList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const operationsKeyList = ['+', '-', '*', '/'];
     if (numbersKeyList.includes(key)) {
+        // A number is pressed
         calculator.addNumberToDisplay(key);
     } else if (operationsKeyList.includes(key)) {
+        // An operation is pressed
         calculator.addOperationToDisplay(key);
     } else if (key === '=' || key === 'Enter') {
         // It is desired to calculate the result
