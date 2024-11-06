@@ -35,8 +35,16 @@ class Calculator {
             this.wasOperationPressed = false;
             this.numbersList.push(number);
         } else if (this.wasOperationPressed === false) {
-            // A number was pressed before, so concatenate the new number to the current value
-            this.numbersList[this.numbersList.length - 1] += number;
+            // A number was pressed before
+            const lastNumberIdx = this.numbersList.length - 1;
+            const lastNumber = this.numbersList[lastNumberIdx];
+            if (lastNumber === '0') {
+                // The current value is a 0, so replace it with the new number
+                this.numbersList[lastNumberIdx] = number;
+            } else {
+                // Concatenate the new number to the current value
+                this.numbersList[lastNumberIdx] += number;
+            }
         }
         this._printDisplay();
     }
