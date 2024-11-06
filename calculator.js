@@ -81,3 +81,15 @@ for (let child of buttonsDiv.children) {
         });
     }
 }
+
+// Add to corresponding event listener when the keyboard is pressed to be written in the display
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+    const numbersKeyList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const operationsKeyList = ['+', '-', '*', '/'];
+    if (numbersKeyList.includes(key)) {
+        calculator.addNumberToDisplay(key);
+    } else if (operationsKeyList.includes(key)) {
+        calculator.addOperationToDisplay(key);
+    }
+});
