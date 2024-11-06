@@ -19,18 +19,28 @@ class Calculator {
         }
         display.textContent += number.toString();
     }
+
+    // Function to add the input operation to the display
+    addOperationToDisplay(operation) {
+        display.textContent += ` ${operation} `;
+    }
 }
 
 /************************ WEB PAGE LOGIC ************************/
 // Create a new instance of the Calculator class
 const calculator = new Calculator();
 
-// Add to the number buttons the event listener to be written in the display
+// Add to the buttons the corresponding event listener to be written in the display
 for (let child of buttonsDiv.children) {
     if (child.classList.contains("number")) {
         child.addEventListener("click", () => {
             const pressedButtonNumber = child.textContent;
             calculator.addNumberToDisplay(pressedButtonNumber);
+        });
+    } else if (child.classList.contains("operation")) {
+        child.addEventListener("click", () => {
+            const pressedButtonOperation = child.textContent;
+            calculator.addOperationToDisplay(pressedButtonOperation);
         });
     }
 }
