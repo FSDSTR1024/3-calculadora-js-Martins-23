@@ -9,6 +9,10 @@ class Calculator {
     operationsList = [];
     wasOperationPressed = false;
 
+    product(a, b) {
+        return a * b;
+    }
+
     // Function to print the display content
     _printDisplay() {
         let displayContent = '';
@@ -65,10 +69,22 @@ class Calculator {
 
     // Function to calculate the result of the operations
     calculate() {
-        this.numbersList = ['0'];
-        this.operationsList = [];
+        while (this.operationsList.length > 0) {
+            const multiplyIdx = this.operationsList.indexOf('*');
+            if (multiplyIdx !== -1) {
+                // There is a multiplication operation
+                // Get the 2 factors that are involved in the multiplication
+                const factor1 = parseFloat(this.numbersList[multiplyIdx]);
+                const factor2 = parseFloat(this.numbersList[multiplyIdx + 1]);
+                // Replace the factors in the numbers list with the result of the multiplication
+                this.numbersList.splice(multiplyIdx, 2, this.product(factor1, factor2).toString());
+                // Remove the operation from the operations list
+                this.operationsList.splice(multiplyIdx, 1);
+            }
+        }
         this.wasOperationPressed = false;
         this._printDisplay();
+    }
 }
 
 /************************ WEB PAGE LOGIC ************************/
