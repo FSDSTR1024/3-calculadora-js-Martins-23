@@ -70,15 +70,14 @@ const calculator = new Calculator();
 
 // Add to the buttons the corresponding event listener to be written in the display
 for (let child of buttonsDiv.children) {
+    const buttonString = child.textContent;
     if (child.classList.contains("number")) {
         child.addEventListener("click", () => {
-            const pressedButtonNumber = child.textContent;
-            calculator.addNumberToDisplay(pressedButtonNumber);
+            calculator.addNumberToDisplay(buttonString);
         });
     } else if (child.classList.contains("operation")) {
         child.addEventListener("click", () => {
-            const pressedButtonOperation = child.textContent;
-            calculator.addOperationToDisplay(pressedButtonOperation);
+            calculator.addOperationToDisplay(buttonString);
         });
     }
 }
