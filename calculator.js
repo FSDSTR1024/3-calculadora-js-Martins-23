@@ -9,10 +9,20 @@ class Calculator {
     operationsList = [];
     wasOperationPressed = false;
 
+    /********** REQUESTED FUNCTIONS **********/
+    add() {}
+
+    substract() {}
+
     product(a, b) {
         return a * b;
     }
 
+    division() {}
+
+    clear() {}
+
+    /********** ADDITIONAL FUNCTIONS **********/
     // Function to print the display content
     _printDisplay() {
         let displayContent = '';
