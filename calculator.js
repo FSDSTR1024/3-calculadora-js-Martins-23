@@ -62,6 +62,13 @@ class Calculator {
         }
         this._printDisplay();
     }
+
+    // Function to calculate the result of the operations
+    calculate() {
+        this.numbersList = ['0'];
+        this.operationsList = [];
+        this.wasOperationPressed = false;
+        this._printDisplay();
 }
 
 /************************ WEB PAGE LOGIC ************************/
@@ -79,6 +86,10 @@ for (let child of buttonsDiv.children) {
         child.addEventListener("click", () => {
             calculator.addOperationToDisplay(buttonString);
         });
+    } else if (child.classList.contains("calculate")) {
+        child.addEventListener("click", () => {
+            calculator.calculate();
+        });
     }
 }
 
@@ -91,5 +102,8 @@ document.addEventListener("keydown", (event) => {
         calculator.addNumberToDisplay(key);
     } else if (operationsKeyList.includes(key)) {
         calculator.addOperationToDisplay(key);
+    } else if (key === '=' || key === 'Enter') {
+        // It is desired to calculate the result
+        calculator.calculate();
     }
 });
