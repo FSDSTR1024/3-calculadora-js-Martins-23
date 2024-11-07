@@ -28,7 +28,9 @@ class Calculator {
         return factor1 * factor2;
     }
 
-    divide() {}
+    divide(divisor, quotient) {
+        return divisor / quotient;
+    }
 
     clear() {}
 
