@@ -5,15 +5,16 @@ const buttonsDiv = document.getElementById("buttons");
 
 /*********************** CALCULATOR CLASS ***********************/
 class Calculator {
-    numbersList = ['0'];
-    operationsList = [];
     operationsPriorityList = [
         { symbol: "*", method: this.multiply, priority: 1 },    // Multiplication
         { symbol: "/", method: this.divide, priority: 2 },      // Division
         { symbol: "+", method: this.add, priority: 3 },         // Addition
         { symbol: "-", method: this.substract, priority: 4 }    // Substraction
     ]
-    wasOperationPressed = false;
+
+    constructor() {
+        this._setInitialState();
+    }
 
     /********** REQUESTED FUNCTIONS **********/
     add(addend1, addend2) {
@@ -35,7 +36,9 @@ class Calculator {
         return divisor / quotient;
     }
 
-    clear() {}
+    clear() {
+        this._setInitialState();
+    }
 
     /********** ADDITIONAL FUNCTIONS **********/
     // Function to print the display content
@@ -48,6 +51,14 @@ class Calculator {
             }
         }
         display.textContent = displayContent;
+    }
+
+    // Function to set the initial state of the calculator
+    _setInitialState() {
+        this.numbersList = ['0'];
+        this.operationsList = [];
+        this.wasOperationPressed = false;
+        this._printDisplay();
     }
 
     // Function to add the input number to the display, handling 0's
@@ -141,6 +152,10 @@ for (let child of buttonsDiv.children) {
     } else if (child.classList.contains("calculate")) {
         child.addEventListener("click", () => {
             calculator.calculate();
+        });
+    } else if (child.id === "clear") {
+        child.addEventListener("click", () => {
+            calculator.clear();
         });
     }
 }
