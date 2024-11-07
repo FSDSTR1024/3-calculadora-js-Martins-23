@@ -8,8 +8,8 @@ class Calculator {
     numbersList = ['0'];
     operationsList = [];
     operationsPriorityList = [
-        { symbol: "*", method: this.product, priority: 1 },     // Multiplication
-        { symbol: "/", method: this.division, priority: 2 },    // Division
+        { symbol: "*", method: this.multiply, priority: 1 },    // Multiplication
+        { symbol: "/", method: this.divide, priority: 2 },      // Division
         { symbol: "+", method: this.add, priority: 3 },         // Addition
         { symbol: "-", method: this.substract, priority: 4 }    // Substraction
     ]
@@ -24,11 +24,11 @@ class Calculator {
         return a - b;
     }
 
-    product(a, b) {
+    multiply(a, b) {
         return a * b;
     }
 
-    division() {}
+    divide() {}
 
     clear() {}
 
