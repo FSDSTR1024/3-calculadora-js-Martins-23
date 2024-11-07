@@ -90,7 +90,7 @@ class Calculator {
             let operationIdx = -1;
             let operationMethod = undefined;
 
-            for (let operation of this.operationsPriorityList) {
+            for (let operation of this.operationsPriorityList.sort((x, y) => x.priority - y.priority)) {
                 operationIdx = this.operationsList.indexOf(operation.symbol);
                 if (operationIdx !== -1) {
                     operationMethod = operation.method;
