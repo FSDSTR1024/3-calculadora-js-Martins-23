@@ -29,6 +29,9 @@ class Calculator {
     }
 
     divide(divisor, quotient) {
+        if (quotient === 0) {
+            alert('Division by zero is not allowed!');
+        }
         return divisor / quotient;
     }
 
