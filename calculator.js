@@ -10,7 +10,9 @@ class Calculator {
     wasOperationPressed = false;
 
     /********** REQUESTED FUNCTIONS **********/
-    add() {}
+    add(a, b) {
+        return a + b;
+    }
 
     substract() {}
 
@@ -80,16 +82,29 @@ class Calculator {
     // Function to calculate the result of the operations
     calculate() {
         while (this.operationsList.length > 0) {
+            // Check if there is a multiplication operation
             const multiplyIdx = this.operationsList.indexOf('*');
             if (multiplyIdx !== -1) {
-                // There is a multiplication operation
                 // Get the 2 factors that are involved in the multiplication
                 const factor1 = parseFloat(this.numbersList[multiplyIdx]);
                 const factor2 = parseFloat(this.numbersList[multiplyIdx + 1]);
-                // Replace the factors in the numbers list with the result of the multiplication
+                // Replace the factors in the numbers-list with the result of the multiplication
                 this.numbersList.splice(multiplyIdx, 2, this.product(factor1, factor2).toString());
-                // Remove the operation from the operations list
+                // Remove the operation from the operations-list
                 this.operationsList.splice(multiplyIdx, 1);
+                continue;
+            }
+            // Check if there is an addition operation
+            const addIdx = this.operationsList.indexOf('+');
+            if (addIdx !== -1) {
+                // Get the 2 factors that are involved in the addition
+                const addend1 = parseFloat(this.numbersList[addIdx]);
+                const addend2 = parseFloat(this.numbersList[addIdx + 1]);
+                // Replace the addends in the numbers-list with the result of the addition
+                this.numbersList.splice(addIdx, 2, this.add(addend1, addend2).toString());
+                // Remove the operation from the operations-list
+                this.operationsList.splice(addIdx, 1);
+                continue;
             }
         }
         this.wasOperationPressed = false;
