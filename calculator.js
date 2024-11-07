@@ -44,9 +44,7 @@ class Calculator {
         // - The current value in the display is a 0
         if (this.numbersList.length === 1 && this.numbersList[0] === '0' && this.wasOperationPressed === false) {
             this.numbersList[0] = number;
-        }
-        // Check if an operation was pressed before
-        else if (this.wasOperationPressed === true) {
+        } else if (this.wasOperationPressed === true) {
             // An operation was pressed before, add to the list a new number
             this.wasOperationPressed = false;
             this.numbersList.push(number);
@@ -67,7 +65,6 @@ class Calculator {
 
     // Function to add the input operation to the display
     addOperationToDisplay(operation) {
-        // Check if an operation was pressed before
         if (this.wasOperationPressed === true) {
             // An operation was pressed before, so change the last operation
             this.operationsList[this.operationsList.length - 1] = operation;
