@@ -82,30 +82,36 @@ class Calculator {
     // Function to calculate the result of the operations
     calculate() {
         while (this.operationsList.length > 0) {
+            let operationMethod = undefined;
+
             // Check if there is a multiplication operation
-            const multiplyIdx = this.operationsList.indexOf('*');
-            if (multiplyIdx !== -1) {
-                // Get the 2 factors that are involved in the multiplication
-                const factor1 = parseFloat(this.numbersList[multiplyIdx]);
-                const factor2 = parseFloat(this.numbersList[multiplyIdx + 1]);
-                // Replace the factors in the numbers-list with the result of the multiplication
-                this.numbersList.splice(multiplyIdx, 2, this.product(factor1, factor2).toString());
-                // Remove the operation from the operations-list
-                this.operationsList.splice(multiplyIdx, 1);
-                continue;
+            let operationIdx = this.operationsList.indexOf('*');
+            if (operationIdx !== -1) {
+                // Do the multiplication. 1st priority.
+                operationMethod = this.product;
+            } else {
+                // Check if there is an addition operation
+                operationIdx = this.operationsList.indexOf('+');
+                if (operationIdx !== -1) {
+                    // Do the addition. 3rd priority.
+                    operationMethod = this.add;
+                }
             }
-            // Check if there is an addition operation
-            const addIdx = this.operationsList.indexOf('+');
-            if (addIdx !== -1) {
-                // Get the 2 factors that are involved in the addition
-                const addend1 = parseFloat(this.numbersList[addIdx]);
-                const addend2 = parseFloat(this.numbersList[addIdx + 1]);
-                // Replace the addends in the numbers-list with the result of the addition
-                this.numbersList.splice(addIdx, 2, this.add(addend1, addend2).toString());
-                // Remove the operation from the operations-list
-                this.operationsList.splice(addIdx, 1);
-                continue;
+
+            // Check if it was found any operation
+            if (operationMethod === undefined) {
+                break;
             }
+
+            // Replace the operands (from the numbers-list) involved in the operation with the result of it
+            this.numbersList.splice(operationIdx, 2,
+                operationMethod(
+                    parseFloat(this.numbersList[operationIdx]),
+                    parseFloat(this.numbersList[operationIdx + 1])
+                ).toString()
+            );
+            // Remove the operation from the operations-list
+            this.operationsList.splice(operationIdx, 1);
         }
         this.wasOperationPressed = false;
         this._printDisplay();
