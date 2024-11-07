@@ -14,7 +14,9 @@ class Calculator {
         return a + b;
     }
 
-    substract() {}
+    substract(a, b) {
+        return a - b;
+    }
 
     product(a, b) {
         return a * b;
@@ -92,6 +94,13 @@ class Calculator {
                 if (operationIdx !== -1) {
                     // Do the addition. 3rd priority.
                     operationMethod = this.add;
+                } else {
+                    // Check if there is a substraction operation
+                    operationIdx = this.operationsList.indexOf('-');
+                    if (operationIdx !== -1) {
+                        // Do the substraction. 4th priority.
+                        operationMethod = this.substract;
+                    }
                 }
             }
 
