@@ -16,16 +16,16 @@ class Calculator {
     wasOperationPressed = false;
 
     /********** REQUESTED FUNCTIONS **********/
-    add(a, b) {
-        return a + b;
+    add(addend1, addend2) {
+        return addend1 + addend2;
     }
 
-    substract(a, b) {
-        return a - b;
+    substract(minuend, subtrahend) {
+        return minuend - subtrahend;
     }
 
-    multiply(a, b) {
-        return a * b;
+    multiply(factor1, factor2) {
+        return factor1 * factor2;
     }
 
     divide() {}
