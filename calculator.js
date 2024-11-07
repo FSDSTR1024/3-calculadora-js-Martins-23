@@ -7,6 +7,12 @@ const buttonsDiv = document.getElementById("buttons");
 class Calculator {
     numbersList = ['0'];
     operationsList = [];
+    operationsPriorityList = [
+        { symbol: "*", method: this.product, priority: 1 },     // Multiplication
+        { symbol: "/", method: this.division, priority: 2 },    // Division
+        { symbol: "+", method: this.add, priority: 3 },         // Addition
+        { symbol: "-", method: this.substract, priority: 4 }    // Substraction
+    ]
     wasOperationPressed = false;
 
     /********** REQUESTED FUNCTIONS **********/
@@ -81,26 +87,14 @@ class Calculator {
     // Function to calculate the result of the operations
     calculate() {
         while (this.operationsList.length > 0) {
+            let operationIdx = -1;
             let operationMethod = undefined;
 
-            // Check if there is a multiplication operation
-            let operationIdx = this.operationsList.indexOf('*');
-            if (operationIdx !== -1) {
-                // Do the multiplication. 1st priority.
-                operationMethod = this.product;
-            } else {
-                // Check if there is an addition operation
-                operationIdx = this.operationsList.indexOf('+');
+            for (let operation of this.operationsPriorityList) {
+                operationIdx = this.operationsList.indexOf(operation.symbol);
                 if (operationIdx !== -1) {
-                    // Do the addition. 3rd priority.
-                    operationMethod = this.add;
-                } else {
-                    // Check if there is a substraction operation
-                    operationIdx = this.operationsList.indexOf('-');
-                    if (operationIdx !== -1) {
-                        // Do the substraction. 4th priority.
-                        operationMethod = this.substract;
-                    }
+                    operationMethod = operation.method;
+                    break;
                 }
             }
 
