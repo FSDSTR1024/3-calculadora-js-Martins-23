@@ -139,19 +139,20 @@ class Calculator {
             // The last introduced element was an operation
             this.operationsList.pop();
             this.wasOperationPressed = false;
-        } else if (this.numbersList.length > 1) {
+        } else {
             // The last introduced element was a number
             const lastNumber = this.numbersList.pop();
             if (lastNumber.length > 1) {
-                // The last number has more than one digit
+                // The last number had more than one digit
                 this.numbersList.push(lastNumber.slice(0, -1));
             } else {
-                // The last number has only one digit
+                // The last number had only one digit
+                if (this.numbersList.length === 0) {
+                    // The last introduced element was actually the first number introduced
+                    this.numbersList.push('0');
+                }
                 this.wasOperationPressed = true;
             }
-        } else {
-            // The last introduced element was actually the first number introduced
-            this.numbersList[0] = '0';
         }
         this._printDisplay();
     }
