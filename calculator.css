@@ -15,7 +15,7 @@ h2 {
   text-align: right;
 }
 
-/* 3. Calculator Numbers */
+/* 3. Calculator Buttons */
 #buttons {
   column-gap: 5px;
   display: grid;
@@ -25,4 +25,11 @@ h2 {
 
 #buttons button {
   font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#buttons button img {
+  vertical-align: middle;
+  width: 30px;
 }
