@@ -132,6 +132,29 @@ class Calculator {
         this.wasOperationPressed = false;
         this._printDisplay();
     }
+
+    // Function to delete the last introduced element
+    deleteLastEntry() {
+        if (this.wasOperationPressed === true) {
+            // The last introduced element was an operation
+            this.operationsList.pop();
+            this.wasOperationPressed = false;
+        } else if (this.numbersList.length > 1) {
+            // The last introduced element was a number
+            const lastNumber = this.numbersList.pop();
+            if (lastNumber.length > 1) {
+                // The last number has more than one digit
+                this.numbersList.push(lastNumber.slice(0, -1));
+            } else {
+                // The last number has only one digit
+                this.wasOperationPressed = true;
+            }
+        } else {
+            // The last introduced element was actually the first number introduced
+            this.numbersList[0] = '0';
+        }
+        this._printDisplay();
+    }
 }
 
 /************************ WEB PAGE LOGIC ************************/
@@ -157,6 +180,10 @@ for (let child of buttonsDiv.children) {
         child.addEventListener("click", () => {
             calculator.clear();
         });
+    } else if (child.id === "delete") {
+        child.addEventListener("click", () => {
+            calculator.deleteLastEntry();
+        });
     }
 }
 
@@ -174,5 +201,8 @@ document.addEventListener("keydown", (event) => {
     } else if (key === '=' || key === 'Enter') {
         // It is desired to calculate the result
         calculator.calculate();
+    } else if (key === 'Backspace') {
+        // It is desired to delete the last introduced element
+        calculator.deleteLastEntry();
     }
 });
