@@ -201,6 +201,9 @@ document.addEventListener("keydown", (event) => {
     } else if (key === '=' || key === 'Enter') {
         // It is desired to calculate the result
         calculator.calculate();
+    } else if (key === 'c' || key === 'C') {
+        // It is desired to clear the display
+        calculator.clear();
     } else if (key === 'Backspace') {
         // It is desired to delete the last introduced element
         calculator.deleteLastEntry();
