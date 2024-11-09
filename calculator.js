@@ -9,22 +9,26 @@ class Calculator {
         {  // Multiplication
             priority: 1,
             symbol: "*",
-            method: this.multiply
+            method: this.multiply,
+            neededValues: 2
         },
         {  // Division
             priority: 2,
             symbol: "/",
-            method: this.divide
+            method: this.divide,
+            neededValues: 2
         },
         {  // Addition
             priority: 3,
             symbol: "+",
-            method: this.add
+            method: this.add,
+            neededValues: 2
         },
         {  // Substraction
             priority: 4,
             symbol: "-",
-            method: this.substract
+            method: this.substract,
+            neededValues: 2
         }
     ]
 
@@ -120,27 +124,26 @@ class Calculator {
     calculate() {
         while (this.operationsList.length > 0) {
             let operationIdx = -1;
-            let operationMethod = undefined;
+            let operationObj = undefined;
 
             for (let operation of this.operationsPriorityList.sort((x, y) => x.priority - y.priority)) {
                 operationIdx = this.operationsList.indexOf(operation.symbol);
                 if (operationIdx !== -1) {
-                    operationMethod = operation.method;
+                    operationObj = operation;
                     break;
                 }
             }
 
             // Check if it was found any operation
-            if (operationMethod === undefined) {
+            if (operationObj === undefined) {
                 break;
             }
 
-            // Replace the operands (from the numbers-list) involved in the operation with the result of it
-            this.numbersList.splice(operationIdx, 2,
-                operationMethod(
-                    parseFloat(this.numbersList[operationIdx]),
-                    parseFloat(this.numbersList[operationIdx + 1])
-                ).toString()
+            // Retrieve the involved number(s) in the operation (operands)...
+            let numbersArray = this.numbersList.splice(operationIdx, operationObj.neededValues);
+            // ... and replace with the result of it
+            this.numbersList.splice(operationIdx, 0,
+                operationObj.method(...numbersArray.map(num => parseFloat(num))).toString()
             );
             // Remove the operation from the operations-list
             this.operationsList.splice(operationIdx, 1);
