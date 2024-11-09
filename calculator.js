@@ -26,25 +26,25 @@ class Calculator {
         },
         {  // Multiplication
             priority: 4,
-            symbol: "*",
+            symbol: '*',
             method: this.multiply,
             neededValues: 2
         },
         {  // Division
             priority: 5,
-            symbol: "/",
+            symbol: '/',
             method: this.divide,
             neededValues: 2
         },
         {  // Addition
             priority: 6,
-            symbol: "+",
+            symbol: '+',
             method: this.add,
             neededValues: 2
         },
         {  // Substraction
             priority: 7,
-            symbol: "-",
+            symbol: '-',
             method: this.substract,
             neededValues: 2
         }
@@ -69,7 +69,7 @@ class Calculator {
 
     divide(divisor, quotient) {
         if (quotient === 0) {
-            alert('Division by zero is not allowed!');
+            alert("Division by zero is not allowed!");
         }
         return divisor / quotient;
     }
@@ -243,20 +243,20 @@ for (let child of buttonsDiv.children) {
 document.addEventListener("keydown", (event) => {
     const key = event.key;
     const numbersKeyList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    const operationsKeyList = ['+', '-', '*', '/'];
+    const operationsKeyList = ['+', '-', '*', '/', '^'];
     if (numbersKeyList.includes(key)) {
         // A number is pressed
         calculator.addNumberToDisplay(key);
     } else if (operationsKeyList.includes(key)) {
         // An operation is pressed
         calculator.addOperationToDisplay(key);
-    } else if (key === '=' || key === 'Enter') {
+    } else if (key === '=' || key === "Enter") {
         // It is desired to calculate the result
         calculator.calculate();
     } else if (key === 'c' || key === 'C') {
         // It is desired to clear the display
         calculator.clear();
-    } else if (key === 'Backspace') {
+    } else if (key === "Backspace") {
         // It is desired to delete the last introduced element
         calculator.deleteLastEntry();
     }
