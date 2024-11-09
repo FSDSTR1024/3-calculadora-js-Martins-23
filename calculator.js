@@ -6,26 +6,44 @@ const buttonsDiv = document.getElementById("buttons");
 /*********************** CALCULATOR CLASS ***********************/
 class Calculator {
     operationsPriorityList = [
-        {  // Multiplication
+        {  // Square root
             priority: 1,
+            symbol: '\u221A',
+            method: this.squareRoot,
+            neededValues: 1
+        },
+        {  // Square
+            priority: 2,
+            symbol: '\u00B2',
+            method: this.square,
+            neededValues: 1
+        },
+        {  // Power of
+            priority: 3,
+            symbol: '\u005E',
+            method: this.powerOf,
+            neededValues: 2
+        },
+        {  // Multiplication
+            priority: 4,
             symbol: "*",
             method: this.multiply,
             neededValues: 2
         },
         {  // Division
-            priority: 2,
+            priority: 5,
             symbol: "/",
             method: this.divide,
             neededValues: 2
         },
         {  // Addition
-            priority: 3,
+            priority: 6,
             symbol: "+",
             method: this.add,
             neededValues: 2
         },
         {  // Substraction
-            priority: 4,
+            priority: 7,
             symbol: "-",
             method: this.substract,
             neededValues: 2
@@ -61,6 +79,15 @@ class Calculator {
     }
 
     /********** ADDITIONAL FUNCTIONS **********/
+    squareRoot(number) {
+        // I tried to implement the square root function without using the Math library
+        // (with what's called the Long Division Method), but it was getting too complex...
+        if (number < 0) {
+            alert("Square root of negative number is not allowed!");
+        }
+        return Math.sqrt(number);
+    }
+
     // Function to print the display content
     _printDisplay() {
         let displayContent = '';
@@ -108,14 +135,19 @@ class Calculator {
     }
 
     // Function to add the input operation to the display
-    addOperationToDisplay(operation) {
-        if (this.wasOperationPressed === true) {
+    addOperationToDisplay(operationString) {
+        if (operationString === '\u221A') {
+            // Calculate (if necessary) what's in the display and then apply the square root
+            this.calculate();
+            // Replace the remaining number (there should be only one number) with the square root of it
+            this.numbersList.splice(0, 1, this.squareRoot(parseFloat(this.numbersList[0])));
+        } else if (this.wasOperationPressed === true) {
             // An operation was pressed before, so change the last operation
-            this.operationsList[this.operationsList.length - 1] = operation;
+            this.operationsList[this.operationsList.length - 1] = operationString;
         } else if (this.wasOperationPressed === false) {
             // A number was pressed before, so add to the list a new operation
             this.wasOperationPressed = true;
-            this.operationsList.push(operation);
+            this.operationsList.push(operationString);
         }
         this._printDisplay();
     }
