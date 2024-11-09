@@ -6,10 +6,26 @@ const buttonsDiv = document.getElementById("buttons");
 /*********************** CALCULATOR CLASS ***********************/
 class Calculator {
     operationsPriorityList = [
-        { symbol: "*", method: this.multiply, priority: 1 },    // Multiplication
-        { symbol: "/", method: this.divide, priority: 2 },      // Division
-        { symbol: "+", method: this.add, priority: 3 },         // Addition
-        { symbol: "-", method: this.substract, priority: 4 }    // Substraction
+        {  // Multiplication
+            priority: 1,
+            symbol: "*",
+            method: this.multiply
+        },
+        {  // Division
+            priority: 2,
+            symbol: "/",
+            method: this.divide
+        },
+        {  // Addition
+            priority: 3,
+            symbol: "+",
+            method: this.add
+        },
+        {  // Substraction
+            priority: 4,
+            symbol: "-",
+            method: this.substract
+        }
     ]
 
     constructor() {
