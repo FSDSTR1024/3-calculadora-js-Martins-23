@@ -4,6 +4,8 @@ const display = document.getElementById("display");
 const buttonsDiv = document.getElementById("buttons");
 const historyList = document.getElementById("historyList");
 
+const deleteButton = document.getElementById("delete");
+
 /*********************** HISTORY ENTRY CLASS ***********************/
 class HistoryEntry {
     constructor(timestamp, operationString, operationResult) {
@@ -163,6 +165,7 @@ class Calculator {
         this.operationsList = [];
         this.showingResult = true;
         this.wasOperationPressed = false;
+        deleteButton.disabled = true;
         this._printDisplay();
     }
 
@@ -175,12 +178,14 @@ class Calculator {
         if (this.numbersList.length === 1 && this.wasOperationPressed === false && (this.numbersList[0] === '0' || this.showingResult === true)) {
             this.showingResult = false;
             this.numbersList[0] = number;
+            deleteButton.disabled = (number === '0');
         } else if (this.wasOperationPressed === true) {
             // An operation was pressed before, add to the list a new number
             this.wasOperationPressed = false;
             this.numbersList.push(number);
         } else if (this.wasOperationPressed === false) {
             // A number was pressed before
+            deleteButton.disabled = false;
             const lastNumberIdx = this.numbersList.length - 1;
             const lastNumber = this.numbersList[lastNumberIdx];
             if (lastNumber === '0') {
@@ -212,6 +217,7 @@ class Calculator {
             // A number was pressed before, so add to the list a new operation
             this.wasOperationPressed = true;
             this.operationsList.push(operationString);
+            deleteButton.disabled = false;
         }
         this._printDisplay();
     }
@@ -270,6 +276,7 @@ class Calculator {
                 if (this.numbersList.length === 0) {
                     // The last introduced element was actually the first number introduced
                     this.numbersList.push('0');
+                    deleteButton.disabled = true;
                 } else {
                     this.wasOperationPressed = true;
                 }
