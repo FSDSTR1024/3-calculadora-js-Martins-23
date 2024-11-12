@@ -120,6 +120,14 @@ class Calculator {
     }
 
     /********** ADDITIONAL FUNCTIONS **********/
+    square(number) {
+        // There were several ways to implement this:
+        // - Using the Math library (Math.pow(number, 2))
+        // -> Using the multiplication operation (number * number)
+        // - Using the power operation (number ** 2)
+        return number * number;
+    }
+
     squareRoot(number) {
         // I tried to implement the square root function without using the Math library
         // (with what's called the Long Division Method), but it was getting too complex...
@@ -180,10 +188,14 @@ class Calculator {
 
     // Function to add the input operation to the display
     addOperationToDisplay(operationString) {
-        if (operationString === '\u221A') {
+        if (['\u221A', '\u00B2'].includes(operationString)) {
             this.wasOperationPressed = true;
             this.operationsList.push(operationString);
-            display.textContent = `${operationString}(${display.textContent})`;
+            if (operationString === '\u221A') {  // Square root
+                display.textContent = `${operationString}(${display.textContent})`;
+            } else if (operationString === '\u00B2') {  // Square
+                display.textContent = `(${display.textContent})${operationString}`;
+            }
             this.calculate();
         } else if (this.wasOperationPressed === true) {
             // An operation was pressed before, so change the last operation
