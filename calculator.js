@@ -145,6 +145,7 @@ class Calculator {
         // (with what's called the Long Division Method), but it was getting too complex...
         if (number < 0) {
             alert("Square root of negative number is not allowed!");
+            return "ERROR! Square root of negative number.";
         }
         return Math.sqrt(number);
     }
@@ -244,6 +245,7 @@ class Calculator {
 
             // Check if it was found any operation
             if (operationObj === undefined) {
+                this.numbersList = ["ERROR! Operation unknown."];
                 break;
             }
 
