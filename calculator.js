@@ -47,47 +47,47 @@ class HistoryEntry {
 /*********************** CALCULATOR CLASS ***********************/
 class Calculator {
     operationsPriorityList = [
-        {  // Square root
-            priority: 1,
-            symbol: '\u221A',
-            method: this.squareRoot,
-            neededValues: 1
-        },
-        {  // Square
-            priority: 2,
-            symbol: '\u00B2',
-            method: this.square,
-            neededValues: 1
-        },
         {  // Power of
-            priority: 3,
+            priority: 1,
             symbol: '\u005E',
             method: this.powerOf,
             neededValues: 2
         },
         {  // Multiplication
-            priority: 4,
+            priority: 2,
             symbol: '*',
             method: this.multiply,
             neededValues: 2
         },
         {  // Division
-            priority: 5,
+            priority: 3,
             symbol: '/',
             method: this.divide,
             neededValues: 2
         },
         {  // Addition
-            priority: 6,
+            priority: 4,
             symbol: '+',
             method: this.add,
             neededValues: 2
         },
         {  // Substraction
-            priority: 7,
+            priority: 5,
             symbol: '-',
             method: this.substract,
             neededValues: 2
+        },
+        {  // Square
+            priority: 6,
+            symbol: '\u00B2',
+            method: this.square,
+            neededValues: 1
+        },
+        {  // Square root
+            priority: 7,
+            symbol: '\u221A',
+            method: this.squareRoot,
+            neededValues: 1
         }
     ]
 
@@ -265,7 +265,7 @@ for (let child of buttonsDiv.children) {
         child.addEventListener("click", () => {
             calculator.addNumberToDisplay(buttonString);
         });
-    } else if (child.classList.contains("operation")) {
+    } else if (child.classList.contains("operation") || child.classList.contains("specialOperation")) {
         child.addEventListener("click", () => {
             calculator.addOperationToDisplay(buttonString);
         });
