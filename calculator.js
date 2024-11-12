@@ -2,6 +2,47 @@
 // Save relevant HTML elements, for later usage
 const display = document.getElementById("display");
 const buttonsDiv = document.getElementById("buttons");
+const historyList = document.getElementById("historyList");
+
+/*********************** HISTORY ENTRY CLASS ***********************/
+class HistoryEntry {
+    constructor(timestamp, operationString, operationResult) {
+        this.timestamp = timestamp;
+        this.operationString = operationString;
+        this.operationResult = operationResult;
+        this._addToHistoryList();
+    }
+
+    _addToHistoryList() {
+        const newHistoryEntry = document.createElement("li");
+        const EntryDiv = document.createElement("div");
+        // Timestamp part
+        const timestampElem = document.createElement("p");
+        timestampElem.classList.add("timestamp");
+        // timestampElem.innerHTML = this.timestamp;
+        timestampElem.textContent = this.timestamp;
+        EntryDiv.appendChild(timestampElem);
+        // Operation part
+        const operationElem = document.createElement("p");
+        operationElem.classList.add("operationStr");
+        operationElem.textContent = this.operationString;
+        EntryDiv.appendChild(operationElem);
+        // Result part
+        const resultElem = document.createElement("p");
+        resultElem.classList.add("operationResult");
+        if (this.operationResult.includes("ERROR")) {
+            resultElem.classList.add("error");
+        } else {
+            resultElem.classList.add("correct");
+        }
+        resultElem.textContent = this.operationResult;
+        EntryDiv.appendChild(resultElem);
+
+        newHistoryEntry.appendChild(EntryDiv);
+        historyList.prepend(newHistoryEntry);
+    }
+}
+
 
 /*********************** CALCULATOR CLASS ***********************/
 class Calculator {
@@ -154,6 +195,8 @@ class Calculator {
 
     // Function to calculate the result of the operations
     calculate() {
+        const timestamp = new Date().toLocaleString();
+        const operationString = `${display.textContent} =`;
         while (this.operationsList.length > 0) {
             let operationIdx = -1;
             let operationObj = undefined;
@@ -180,6 +223,8 @@ class Calculator {
             // Remove the operation from the operations-list
             this.operationsList.splice(operationIdx, 1);
         }
+        const operationResult = this.numbersList[0];
+        new HistoryEntry(timestamp, operationString, operationResult);
         this.wasOperationPressed = false;
         this._printDisplay();
     }
