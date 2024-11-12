@@ -320,7 +320,7 @@ document.addEventListener("keydown", (event) => {
     } else if (operationsKeyList.includes(key)) {
         // An operation is pressed
         calculator.addOperationToDisplay(key);
-    } else if (key === '=' || key === "Enter") {
+    } else if (key === '=') {
         // It is desired to calculate the result
         calculator.calculate();
     } else if (key === 'c' || key === 'C') {
