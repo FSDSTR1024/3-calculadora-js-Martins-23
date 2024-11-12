@@ -270,8 +270,9 @@ class Calculator {
                 if (this.numbersList.length === 0) {
                     // The last introduced element was actually the first number introduced
                     this.numbersList.push('0');
+                } else {
+                    this.wasOperationPressed = true;
                 }
-                this.wasOperationPressed = true;
             }
         }
         this._printDisplay();
