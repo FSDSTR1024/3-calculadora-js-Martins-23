@@ -252,10 +252,12 @@ class Calculator {
             // Remove the operation from the operations-list
             this.operationsList.splice(operationIdx, 1);
         }
+
         const operationResult = this.numbersList[0];
         new HistoryEntry(timestamp, operationString, operationResult);
-        this.wasOperationPressed = false;
-        this.showingResult = true;
+        // This is just for clean-up purposes
+        this._setInitialState();
+        this.numbersList = [operationResult];
         this._printDisplay();
     }
 
