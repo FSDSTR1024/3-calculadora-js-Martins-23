@@ -84,12 +84,12 @@ button.specialOperation:hover {
 }
 
 /* 1.2.2. Calculator '=' Button */
-button.calculate {
+button#calculate {
   background-color: #4caf50;
   font-weight: bold;
 }
 
-button.calculate:hover {
+button#calculate:hover {
   background-color: #388e3c;
 }
 

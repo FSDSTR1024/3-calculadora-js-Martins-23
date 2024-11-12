@@ -5,6 +5,7 @@ const buttonsDiv = document.getElementById("buttons");
 const historyList = document.getElementById("historyList");
 
 const deleteButton = document.getElementById("delete");
+const calculateButton = document.getElementById("calculate");
 
 /*********************** HISTORY ENTRY CLASS ***********************/
 class HistoryEntry {
@@ -196,6 +197,7 @@ class Calculator {
                 this.numbersList[lastNumberIdx] += number;
             }
         }
+        calculateButton.disabled = false;
         this._printDisplay();
     }
 
@@ -218,6 +220,7 @@ class Calculator {
             this.wasOperationPressed = true;
             this.operationsList.push(operationString);
             deleteButton.disabled = false;
+            calculateButton.disabled = true;
         }
         this._printDisplay();
     }
@@ -267,6 +270,7 @@ class Calculator {
             // The last introduced element was an operation
             this.operationsList.pop();
             this.wasOperationPressed = false;
+            calculateButton.disabled = false;
         } else {
             // The last introduced element was a number
             const lastNumber = this.numbersList.pop();
@@ -281,6 +285,7 @@ class Calculator {
                     deleteButton.disabled = true;
                 } else {
                     this.wasOperationPressed = true;
+                    calculateButton.disabled = true;
                 }
             }
         }
@@ -303,7 +308,7 @@ for (let child of buttonsDiv.children) {
         child.addEventListener("click", () => {
             calculator.addOperationToDisplay(buttonString);
         });
-    } else if (child.classList.contains("calculate")) {
+    } else if (child.id === "calculate") {
         child.addEventListener("click", () => {
             calculator.calculate();
         });
