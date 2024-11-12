@@ -118,6 +118,11 @@ button#delete img {
   width: 100%;
 }
 
+button:disabled {
+  background-color: grey !important;
+  cursor: not-allowed;
+}
+
 /* 2. History styles */
 #history h2 {
   color: white;
