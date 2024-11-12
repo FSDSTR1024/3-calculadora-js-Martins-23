@@ -145,6 +145,7 @@ class Calculator {
     _setInitialState() {
         this.numbersList = ['0'];
         this.operationsList = [];
+        this.showingResult = true;
         this.wasOperationPressed = false;
         this._printDisplay();
     }
@@ -154,7 +155,9 @@ class Calculator {
         // Show in the display the introduced value if:
         // - No number was pressed before, the display is "empty"
         // - The current value in the display is a 0
-        if (this.numbersList.length === 1 && this.numbersList[0] === '0' && this.wasOperationPressed === false) {
+        // - An operation was calculated before
+        if (this.numbersList.length === 1 && this.wasOperationPressed === false && (this.numbersList[0] === '0' || this.showingResult === true)) {
+            this.showingResult = false;
             this.numbersList[0] = number;
         } else if (this.wasOperationPressed === true) {
             // An operation was pressed before, add to the list a new number
@@ -226,6 +229,7 @@ class Calculator {
         const operationResult = this.numbersList[0];
         new HistoryEntry(timestamp, operationString, operationResult);
         this.wasOperationPressed = false;
+        this.showingResult = true;
         this._printDisplay();
     }
 
