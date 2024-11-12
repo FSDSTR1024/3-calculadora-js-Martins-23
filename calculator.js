@@ -120,6 +120,14 @@ class Calculator {
     }
 
     /********** ADDITIONAL FUNCTIONS **********/
+    powerOf(base, exponent) {
+        // There were several ways to implement this:
+        // - Using the Math library (Math.pow(base, exponent))
+        // - Using the multiplication operation (base * base * base * ... * base) exponent times
+        // -> Using the power operation (base ** exponent)
+        return base ** exponent;
+    }
+
     square(number) {
         // There were several ways to implement this:
         // - Using the Math library (Math.pow(number, 2))
