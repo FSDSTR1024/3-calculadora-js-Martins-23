@@ -68,16 +68,16 @@ class Calculator {
             method: this.divide,
             neededValues: 2
         },
-        {  // Addition
-            priority: 4,
-            symbol: '+',
-            method: this.add,
-            neededValues: 2
-        },
         {  // Substraction
-            priority: 5,
+            priority: 4,
             symbol: '-',
             method: this.substract,
+            neededValues: 2
+        },
+        {  // Addition
+            priority: 5,
+            symbol: '+',
+            method: this.add,
             neededValues: 2
         },
         {  // Square
