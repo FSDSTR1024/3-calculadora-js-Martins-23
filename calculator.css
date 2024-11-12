@@ -105,3 +105,69 @@ button#delete img {
   vertical-align: middle;
   width: 100%;
 }
+
+/* 2. History styles */
+#history h2 {
+  color: white;
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#historyList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 2.1. History entries styles */
+#historyList li {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#historyList li:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+#historyList li div {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2.1.1. Timestamps */
+#historyList .timestamp {
+  color: grey;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* 2.1.2. Operation */
+#historyList .operationStr {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+/* 2.1.3. Results */
+#historyList .operationResult {
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: bold;
+  margin: 0;
+}
+
+#historyList .correct {
+  color: #4caf50;
+}
+
+#historyList .error {
+  color: #e31f26;
+}
