@@ -114,6 +114,7 @@ class Calculator {
     divide(divisor, quotient) {
         if (quotient === 0) {
             alert("Division by zero is not allowed!");
+            return "ERROR: Division by zero!";
         }
         return divisor / quotient;
     }
@@ -248,19 +249,23 @@ class Calculator {
 
             // Retrieve the involved number(s) in the operation (operands)...
             let numbersArray = this.numbersList.splice(operationIdx, operationObj.neededValues);
-            // ... and replace with the result of it
-            this.numbersList.splice(operationIdx, 0,
-                operationObj.method(...numbersArray.map(num => parseFloat(num))).toString()
-            );
+            // ... perform the operation with them and check the result is OK ...
+            const operationResult = operationObj.method(...numbersArray.map(num => parseFloat(num))).toString();
+            if (operationResult.includes("ERROR")) {
+                this.numbersList = [operationResult];
+                break;
+            }
+            // ... and replace them with the result of it if no ERRORs were found
+            this.numbersList.splice(operationIdx, 0, operationResult);
             // Remove the operation from the operations-list
             this.operationsList.splice(operationIdx, 1);
         }
 
-        const operationResult = this.numbersList[0];
-        new HistoryEntry(timestamp, operationString, operationResult);
+        const calculationResult = this.numbersList[0];
+        new HistoryEntry(timestamp, operationString, calculationResult);
         // This is just for clean-up purposes
         this._setInitialState();
-        this.numbersList = [operationResult];
+        this.numbersList = calculationResult.includes("ERROR") ? ['0'] : [calculationResult];
         this._printDisplay();
     }
 
