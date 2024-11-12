@@ -178,10 +178,10 @@ class Calculator {
     // Function to add the input operation to the display
     addOperationToDisplay(operationString) {
         if (operationString === '\u221A') {
-            // Calculate (if necessary) what's in the display and then apply the square root
+            this.wasOperationPressed = true;
+            this.operationsList.push(operationString);
+            display.textContent = `${operationString}(${display.textContent})`;
             this.calculate();
-            // Replace the remaining number (there should be only one number) with the square root of it
-            this.numbersList.splice(0, 1, this.squareRoot(parseFloat(this.numbersList[0])));
         } else if (this.wasOperationPressed === true) {
             // An operation was pressed before, so change the last operation
             this.operationsList[this.operationsList.length - 1] = operationString;
