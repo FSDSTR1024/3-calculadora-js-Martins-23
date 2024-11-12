@@ -76,6 +76,14 @@ button.operation:hover {
   background-color: #f67b0f;
 }
 
+button.specialOperation {
+  background-color: #c278f7;
+}
+
+button.specialOperation:hover {
+  background-color: #9850fc;
+}
+
 /* 1.2.2. Calculator '=' Button */
 button.calculate {
   background-color: #4caf50;
